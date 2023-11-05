@@ -1,0 +1,127 @@
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'assets/images/favicon.png' %}" rel="icon" type="image/png">
+    <title>Sign Up - Social Book</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+}
+
+#wrapper {
+    width: 80%;
+    margin: auto;
+}
+
+.container {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+input[type=text], input[type=email], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.footer {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid #e7e7e7;
+    color: #a1a1a1;
+}
+
+</style>
+<body bgcolor="white">
+    <div id="wrapper" class="flex flex-col justify-between h-screen">
+        <!-- header-->
+        <div class="bg-white py-4 shadow dark:bg-gray-800">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-center lg:justify-between justify-around">
+                    <a href="trending.html">
+                        <b><h1>Reach Me..</h1></b>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content-->
+        <div>
+            <div>
+                <center><h1> Sign Up</h1></center>
+                <p class="mb-2 text-black text-lg"> Register to manage your account </p>
+                <div>
+                    {% for message in messages %}
+                    <h5>{{message}}</h5>
+                    {% endfor %}
+                </div>
+
+               <div class="container">
+          <center>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Username" style="color:black;">
+                    <input type="email" name="email" placeholder="Email" style="color:black;" >
+                    <input type="password" name="password" placeholder="Password" style="color:black;">
+                    <input type="password" name="password2" placeholder="Confirm Password"style="color:black;" >
+                     <div class="flex justify-start my-4 space-x-1">
+                        <div class="checkbox">
+                            <input type="checkbox" id="chekcbox1" checked>
+                            <label for="chekcbox1"><span class="checkbox-icon"></span> I Agree</label>
+                        </div>
+                        <a href="#"> Terms and Conditions</a>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                    <div class="text-center mt-5 space-x-2">
+                        <p class="text-base"> Do you have an account? <a href="/signin"> Login </a></p>
+                    </div>
+                </form>
+           </center>
+               </div>
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+                    <a href="#"> About</a>
+                    <a href="#"> Help</a>
+                    <a href="#"> Terms</a>
+                    <a href="#"> Privacy</a>
+                </div>
+                <p class="capitalize"> © copyright 2020 by social media</p>
+
+    </div>
+</body>
+</html>

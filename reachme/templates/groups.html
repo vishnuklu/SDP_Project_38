@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Social Media Groups</title>
+</head>
+<style>
+  body {
+  font-family: sans-serif;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-top: 1rem;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 1rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+button {
+  margin-left: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+#success-message {
+  margin-top: 1rem;
+  text-align: center;
+}
+button {
+  background-color: #007bff;
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+  background-color: #0069d9;
+}
+/* Add a border to the group lists */
+ul {
+  border: 1px solid #ccc;
+  padding: 1rem;
+}
+
+/* Make the group list items larger and more readable */
+li {
+  font-size: 1.2rem;
+}
+
+/* Center the success message */
+#success-message {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Add a box shadow to the success message */
+#success-message {
+  box-shadow: 0px 0px 5px #000;
+}
+
+/* Add a hover effect to the success message */
+#success-message:hover {
+  background-color: #007bff;
+  color: #ffffff;
+}
+body {
+  background-color: smoke;
+}
+
+h2 {
+  color: #ffc107;
+}
+
+ul {
+  color: black;
+}
+
+button {
+  background-color: #dc3545;
+  color: #ffffff;
+}
+
+</style>
+<body>
+  <p>User: Siva</p>
+
+  <center><h2>Friends Groups</h2></center>
+  <ul>
+    <li>KL Friends<button onclick="joinGroup('KL Friends')">Join</button></li>
+    <li>Njoy Pandagow<button onclick="joinGroup('Njoy Pandagow')">Join</button></li>
+    <li>Childhood batch<button onclick="joinGroup('Childhood batch')">Join</button></li>
+    <li>Inter batch<button onclick="joinGroup('Inter batch')">Join</button></li>
+    <li>Natu Guntula Gang<button onclick="joinGroup('Natu Guntula Gang')">Join</button></li>
+  </ul>
+
+  <center><h2>Organization Groups</h2></center>
+  <ul>
+    <li>KL University Org<button onclick="joinGroup('KL University Org')">Join</button></li>
+    <li>Infosys Ltd<button onclick="joinGroup('Infosys Ltd')">Join</button></li>
+    <li>Tata Steel Ltd<button onclick="joinGroup('Tata Steel Ltd')">Join</button></li>
+    <li>Social Groups<button onclick="joinGroup('Social Groups')">Join</button></li>
+    <li>Helping Hands<button onclick="joinGroup('Helping Hands')">Join</button></li>
+  </ul>
+
+  <!-- Success Message -->
+  <div id="success-message" style="color: green; display: none;">
+    Successfully joined a group!
+  </div>
+
+  <script>
+    // Simulated user data
+    const currentUser = {
+      name: "Siva", // Update the user's name here
+      joinedGroups: [],
+    };
+
+    // Function to join a group
+    function joinGroup(groupName) {
+      if (!currentUser.joinedGroups.includes(groupName)) {
+        currentUser.joinedGroups.push(groupName);
+        updateGroupLists();
+        displaySuccessMessage();
+      }
+    }
+
+    // Function to display the success message
+    function displaySuccessMessage() {
+      const successMessage = document.getElementById("success-message");
+      successMessage.style.display = "block";
+      setTimeout(() => {
+        successMessage.style.display = "none";
+      }, 3000); // Hide the message after 3 seconds
+    }
+
+    // Function to update the group lists
+    function updateGroupLists() {
+      const friendsGroupsList = document.getElementById("friends-groups");
+      const orgGroupsList = document.getElementById("org-groups");
+
+      friendsGroupsList.innerHTML = currentUser.joinedGroups
+        .filter(group => group.startsWith("Group "))
+        .map(group => `<li>${group} <button onclick="leaveGroup('${group}')">Leave</button></li>`)
+        .join("");
+
+      orgGroupsList.innerHTML = currentUser.joinedGroups
+        .filter(group => group.startsWith("Group A") || group.startsWith("Group B"))
+        .map(group => `<li>${group} <button onclick="leaveGroup('${group}')">Leave</button></li>`)
+        .join("");
+    }
+
+    // Function to leave a group
+    function leaveGroup(groupName) {
+      currentUser.joinedGroups = currentUser.joinedGroups.filter(group => group !== groupName);
+      updateGroupLists();
+    }
+
+    // Initial population of group lists
+    updateGroupLists();
+  </script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{% static 'assets/images/favicon.png' %}" rel="icon" type="image/png">
+    <title>Sign In - Social Book</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+}
+
+#wrapper {
+    width: 80%;
+    margin: auto;
+}
+
+.login {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 4px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.footer {
+    background-color: #f2f2f2;
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid #e7e7e7;
+    color: #a1a1a1;
+}
+
+
+</style>
+<body class="bg-gray-100">
+
+
+    <div id="wrapper" class="flex flex-col justify-between h-screen">
+
+        <!-- header-->
+        <div class="bg-white py-4 shadow dark:bg-gray-800">
+            <div class="max-w-6xl mx-auto">
+
+
+                <div class="flex items-center lg:justify-between justify-around">
+
+                    <a href="trending.html">
+                       <b><h1 style="font-size: 1.5rem;">Reach Me...</h1></b>
+                    </a>
+
+
+
+                        <a href="/signup" class="bg-pink-500 pink-500 px-6 py-3 rounded-md shadow text-white">Register</a>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Content-->
+        <div>
+            <div class="login">
+                <center><h1 class="log"> Log in</h1></center>
+
+
+                <div>
+                    {% for message in messages %}
+                    <h5>{{message}}</h5>
+                    {% endfor %}
+                </div>
+
+
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Username" style="border: 1px solid #d3d5d8 !important;">
+                    <input type="password" name="password" placeholder="Password" style="border: 1px solid #d3d5d8 !important;">
+                     <div class="flex justify-between my-4">
+                        <div class="checkbox">
+                            <input type="checkbox" id="chekcbox1" checked>
+                            <label for="chekcbox1"><span class="checkbox-icon"></span>Remember Me</label>
+                        </div>
+                        <a href="#"> Forgot Your Password? </a>
+                    </div>
+                    <button type="submit">Login</button>
+                    <div class="text-center mt-5 space-x-2">
+                        <p class="text-base"> Not registered? <a href="/signup" class=""> Create a account </a></p>
+                    </div>
+                </form>
+
+
+
+            </div>
+        </div>
+
+        <!-- Footer -->
+       <div class="footer">
+
+
+                    <a href="#"> About</a>
+                    <a href="#"> Help</a>
+                    <a href="#"> Terms</a>
+                    <a href="#"> Privacy</a>
+                </div>
+                <p class="capitalize"> © copyright 2023 by social media</p>
+            </div>
+
+
+
+
+
+</body>
+
+
+</html>

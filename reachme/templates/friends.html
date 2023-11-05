@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Include your CSS file -->
+    <title>Friends Page</title>
+</head>
+<style>
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.friends-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.friends-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 200px; /* Adjust as needed */
+    height: 50px; /* Adjust as needed */
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.friend-name {
+    font-size: 16px;
+    color: #333;
+}
+
+.delete-friend {
+    background-color: #ff0000;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-friend:hover {
+    background-color: #cc0000;
+}
+
+#new-friend-name {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#add-friend {
+    background-color: #008000;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#add-friend:hover {
+    background-color: #006600;
+}
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Include your CSS file -->
+    <title>Friends Page</title>
+</head>
+<body>
+    <h1>My Friends</h1>
+
+    <ul class="friends-list">
+        <!-- List of Friends -->
+        <li>
+            <span class="friend-name">Vishnu</span>
+            <button class="delete-friend" data-friend-id="1">Delete</button>
+        </li>
+        <li>
+            <span class="friend-name">Vasanth</span>
+            <button class="delete-friend" data-friend-id="2">Delete</button>
+        </li>
+        <li>
+            <span class="friend-name">Vignesh</span>
+            <button class="delete-friend" data-friend-id="3">Delete</button>
+        </li>
+        <li>
+            <span class="friend-name">Tharun</span>
+            <button class="delete-friend" data-friend-id="4">Delete</button>
+        </li>
+        <li>
+            <span class="friend-name">Kishan</span>
+            <button class="delete-friend" data-friend-id="5">Delete</button>
+        </li>
+        <li>
+            <span class="friend-name">Dhanunjay</span>
+            <button class="delete-friend" data-friend-id="6">Delete</button>
+        </li>
+        <li>
+            <span class="friend-name">Sandeep</span>
+            <button class="delete-friend" data-friend-id="7">Delete</button>
+        </li>
+        <li>
+            <span class="friend-name">Vijay</span>
+            <button class="delete-friend" data-friend-id="8">Delete</button>
+        </li>
+        <li>
+            <span class="friend-name">Pardhu</span>
+            <button class="delete-friend" data-friend-id="9">Delete</button>
+        </li>
+        <li>
+            <span class="friend-name">Laya</span>
+            <button class="delete-friend" data-friend-id="10">Delete</button>
+        </li>
+    </ul>
+
+    <h2>Add a Friend</h2>
+    <input type="text" id="new-friend-name" placeholder="Friend's Name">
+    <button id="add-friend">Add Friend</button>
+
+    <script>
+        // Function to add a new friend to the list
+        function addFriend(friendName) {
+            const friendsList = document.querySelector('.friends-list');
+            const newFriendId = friendsList.children.length + 1;
+
+            // Create a new list item for the friend
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <span class="friend-name">${friendName}</span>
+                <button class="delete-friend" data-friend-id="${newFriendId}">Delete</button>
+            `;
+
+            // Add the new friend to the list
+            friendsList.appendChild(listItem);
+
+            // Clear the input field
+            document.getElementById('new-friend-name').value = '';
+
+            // Attach the delete event handler to the new friend's delete button
+            const deleteButton = listItem.querySelector('.delete-friend');
+            deleteButton.addEventListener('click', function() {
+                const friendId = this.getAttribute('data-friend-id');
+                // Call a function here to delete the friend using an API
+                // After successful deletion, remove the friend from the list
+                // For now, let's just remove it from the list without an API call
+                listItem.remove();
+            });
+        }
+
+        // Event listener for the "Add Friend" button
+        document.getElementById('add-friend').addEventListener('click', function() {
+            const friendName = document.getElementById('new-friend-name').value;
+            if (friendName.trim() !== '') {
+                addFriend(friendName);
+                // You can also add an API request here to add the friend to the server
+                // Example: addFriendToServer(friendName);
+            }
+        });
+
+        // Event listener for existing delete buttons
+        const deleteButtons = document.querySelectorAll('.delete-friend');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const friendId = this.getAttribute('data-friend-id');
+                // Call a function here to delete the friend using an API
+                // After successful deletion, remove the friend from the list
+                // For now, let's just remove it from the list without an API call
+                this.parentElement.remove();
+            });
+        });
+    </script>
+</body>
+</html>

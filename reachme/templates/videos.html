@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Playlist</title>
+</head>
+<style>
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.video-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.video-list li {
+    margin-bottom: 20px;
+}
+
+.video-list video {
+    width: 500px; /* Adjust as needed */
+    height: 300px; /* Adjust as needed */
+}
+
+.delete-video {
+    display: block;
+    margin-top: 10px;
+    background-color: #ff0000;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-video:hover {
+    background-color: #cc0000;
+}
+
+#new-video {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#add-video {
+    background-color: #008000;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#add-video:hover {
+    background-color: #006600;
+}
+
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Include your CSS file -->
+    <title>Videos Page</title>
+</head>
+<body>
+    <h1>My Videos</h1>
+
+    <ul class="video-list">
+        <!-- List of Videos -->
+        <li>
+            <video controls>
+                <source src="static/video1.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <button class="delete-video" data-video-id="1">Delete</button>
+        </li>
+        <li>
+            <video controls>
+                <source src="static/video2.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <button class="delete-video" data-video-id="2">Delete</button>
+        </li>
+        <li>
+            <video controls>
+                <source src="static/video3.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <button class="delete-video" data-video-id="3">Delete</button>
+        </li>
+        <li>
+            <video controls>
+                <source src="static/video4.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <button class="delete-video" data-video-id="4">Delete</button>
+        </li>
+        <li>
+            <video controls>
+                <source src="static/video5.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <button class="delete-video" data-video-id="5">Delete</button>
+        </li>
+    </ul>
+
+    <h2>Add a Video</h2>
+    <input type="file" id="new-video" accept="video/*">
+    <button id="add-video">Add Video</button>
+
+    <script>
+        // JavaScript code for adding and deleting videos
+        document.getElementById("add-video").addEventListener("click", function() {
+            const videoInput = document.getElementById("new-video");
+            if (videoInput.files.length > 0) {
+                const videoFile = videoInput.files[0];
+                const videoUrl = URL.createObjectURL(videoFile);
+                const videoList = document.querySelector(".video-list");
+
+                // Create a new video element
+                const newVideo = document.createElement("li");
+                newVideo.innerHTML = `
+                    <video controls>
+                        <source src="${videoUrl}" type="${videoFile.type}">
+                        Your browser does not support the video tag.
+                    </video>
+                    <button class="delete-video" data-video-id="${videoList.childElementCount + 1}">Delete</button>
+                `;
+
+                videoList.appendChild(newVideo);
+                videoInput.value = ''; // Clear the input
+            }
+        });
+
+        // Handle video deletion
+        const deleteButtons = document.querySelectorAll(".delete-video");
+        deleteButtons.forEach(button => {
+            button.addEventListener("click", function() {
+                const videoId = this.getAttribute("data-video-id");
+                this.parentElement.remove();
+            });
+        });
+    </script>
+</body>
+</html>

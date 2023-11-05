@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Image Grid</title>
+</head>
+<style>
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.image-list {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.image-list li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-list img {
+    width: 100%; /* Adjust as needed */
+    height: auto; /* Adjust as needed */
+    object-fit: cover;
+}
+
+.delete-image {
+    display: block;
+    margin-top: 10px;
+    background-color: #ff0000;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-image:hover {
+    background-color: #cc0000;
+}
+
+#new-image {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#add-image {
+    background-color: #008000;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#add-image:hover {
+    background-color: #006600;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.image-list {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.image-list li {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 350px; /* Adjust as needed */
+    overflow: hidden;
+}
+
+.image-list img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.delete-image {
+    display: block;
+    margin-top: 10px;
+    background-color: #ff0000;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.delete-image:hover {
+    background-color: #cc0000;
+}
+
+#new-image {
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+#add-image {
+    background-color: #008000;
+    color: #ffffff;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+}
+
+#add-image:hover {
+    background-color: #006600;
+}
+
+</style>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Include your CSS file -->
+    <title>Image Gallery</title>
+</head>
+<body>
+    <h1>My Image Gallery</h1>
+
+    <ul class="image-list">
+        <!-- List of Images -->
+        <li>
+            <img src="static/image1.jpg" alt="Image 1">
+            <button class="delete-image" data-image-id="1">Delete</button>
+        </li>
+        <li>
+            <img src="static/image2.jpg" alt="Image 2">
+            <button class="delete-image" data-image-id="2">Delete</button>
+        </li>
+        <li>
+            <img src="static/image3.jpg" alt="Image 3">
+            <button class="delete-image" data-image-id="3">Delete</button>
+        </li>
+        <li>
+            <img src="static/image4.jpg" alt="Image 4">
+            <button class="delete-image" data-image-id="4">Delete</button>
+        </li>
+        <li>
+            <img src="static/image5.jpg" alt="Image 5">
+            <button class="delete-image" data-image-id="5">Delete</button>
+        </li>
+        <li>
+            <img src="static/image6.jpg" alt="Image 6">
+            <button class="delete-image" data-image-id="6">Delete</button>
+        </li>
+        <li>
+            <img src="static/image7.jpg" alt="Image 7">
+            <button class="delete-image" data-image-id="7">Delete</button>
+        </li>
+        <li>
+            <img src="static/image8.jpg" alt="Image 8">
+            <button class="delete-image" data-image-id="8">Delete</button>
+        </li>
+        <li>
+            <img src="static/image9.jpg" alt="Image 9">
+            <button class="delete-image" data-image-id="9">Delete</button>
+        </li>
+        <li>
+            <img src="static/image10.jpg" alt="Image 10">
+            <button class="delete-image" data-image-id="10">Delete</button>
+        </li>
+    </ul>
+
+    <h2>Add an Image</h2>
+    <input type="file" accept="image/*" id="new-image" name="new-image">
+    <button id="add-image">Add Image</button>
+
+    <script>
+        // Function to add a new image to the gallery
+        function addImage(imageUrl) {
+            const imageList = document.querySelector('.image-list');
+            const newImageId = imageList.children.length + 1;
+
+            // Create a new list item for the image
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <img src="${imageUrl}" alt="Image ${newImageId}">
+                <button class="delete-image" data-image-id="${newImageId}">Delete</button>
+            `;
+
+            // Add the new image to the list
+            imageList.appendChild(listItem);
+
+            // Clear the input field
+            document.getElementById('new-image').value = '';
+
+            // Attach the delete event handler to the new image's delete button
+            const deleteButton = listItem.querySelector('.delete-image');
+            deleteButton.addEventListener('click', function() {
+                const imageId = this.getAttribute('data-image-id');
+                // Call a function here to delete the image using an API
+                // After successful deletion, remove the image from the list
+                // For now, let's just remove it from the list without an API call
+                listItem.remove();
+            });
+        }
+
+        // Event listener for the "Add Image" button
+        document.getElementById('add-image').addEventListener('click', function() {
+            const imageInput = document.getElementById('new-image');
+            const selectedImage = imageInput.files[0];
+            if (selectedImage) {
+                // You can upload the selected image to the server here and get its URL
+                // Example: uploadImageToServer(selectedImage);
+                // For now, let's assume you have the image URL
+                const imageUrl = "image11.jpg"; // Replace with the actual URL
+                addImage(imageUrl);
+            }
+        });
+
+        // Event listener for existing delete buttons
+        const deleteButtons = document.querySelectorAll('.delete-image');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const imageId = this.getAttribute('data-image-id');
+                // Call a function here to delete the image using an API
+                // After successful deletion, remove the image from the list
+                // For now, let's just remove it from the list without an API call
+                this.parentElement.remove();
+            });
+        });
+    </script>
+</body>
+</html>
+
